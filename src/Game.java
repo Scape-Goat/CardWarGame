@@ -62,6 +62,21 @@ public class Game {
             System.out.println("Press enter to continue");
             read.nextLine();
         }
+        else{
+            System.out.println("MATCH!! Press Enter to Continue.");
+
+            int rounds = 4;
+            if(player.getCardCount() < 4 || computer.getCardCount()<4)
+                rounds = Math.min(player.getCardCount(), computer.getCardCount());
+            for(int i = 0; i< rounds; i++){
+
+                System.out.println("*****" + (i+1) + "*****");
+                playCards();
+
+            }
+            checkWin();
+
+        }
 
     }
 
@@ -76,9 +91,11 @@ public class Game {
         do{
             playCards();
             checkWin();
+            rounds +=1;
+        }while(computer.getCardCount() > 0 && player.getCardCount()>0 && rounds <9999);
 
-        }while(computer.getCardCount() > 0 && player.getCardCount()>0);
-
+        System.out.println("Game Over");
+        System.out.println("It lasted " + rounds + " rounds");
 
     }
 }
