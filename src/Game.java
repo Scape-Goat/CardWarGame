@@ -78,6 +78,7 @@ public class Game {
 
         }
 
+
     }
 
 
@@ -85,17 +86,33 @@ public class Game {
 
 
     public static void main (String[] args){
+        Scanner reading = new Scanner(System.in);
+        boolean isPlaying = true;
+        String choice;
+        do {
 
-        setup();
+            setup();
 
-        do{
-            playCards();
-            checkWin();
-            rounds +=1;
-        }while(computer.getCardCount() > 0 && player.getCardCount()>0 && rounds <9999);
+            do {
+                playCards();
+                checkWin();
+                rounds += 1;
+                System.out.println("rounds: " + rounds);
+            } while (computer.getCardCount() > 0 && player.getCardCount() > 0 && rounds < 3333);
 
-        System.out.println("Game Over");
-        System.out.println("It lasted " + rounds + " rounds");
+            System.out.println("Game Over");
+            if (rounds > 3333)
+                System.out.println("Draw. Infinite Game Loop.");
+            System.out.println("It lasted " + rounds + " rounds");
+
+            do {
+                System.out.print("Would you like to play again?(Y or N)");
+                 choice = reading.nextLine();
+                 rounds = 0;
+            }while(!(choice.equals("N")) && !(choice.equals("Y")));
+            if(choice.equals("N"))
+                isPlaying = false;
+        }while(isPlaying);
 
     }
 }
